@@ -1,4 +1,4 @@
-package com.example.avaliaws_08.ui.model
+package com.example.avaliaws_08.model
 
 data class Entrega (
     val notaBase: Int,
