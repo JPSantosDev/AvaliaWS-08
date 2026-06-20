@@ -4,7 +4,8 @@ data class Penalidade(
 
     val motivo:String,
     val pontos: Int,
-    val critica: Boolean
+    val critica: Boolean,
+    val pendencia: Boolean
 
 ){
 
