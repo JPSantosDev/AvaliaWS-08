@@ -50,3 +50,40 @@ class ValidadorId: Validador<Int>{
         }
     }
 }
+
+class ValidadorIdUnico(private val idsExistentes: List<Int>): Validador<Int>{
+    override fun validar(valor: Int): ValidacaoResultado {
+        return when {
+            valor <= 0 -> ValidacaoResultado.Invalido("O ID do competidor deve ser um número positivo.")
+            idsExistentes.contains(valor) -> ValidacaoResultado.Invalido("Já existe um competidor cadastrado com este identificador.")
+            else -> ValidacaoResultado.Valido
+        }
+    }
+}
+
+class ValidadorNotaBase: Validador<Int>{
+    override fun validar(valor: Int): ValidacaoResultado {
+        return when {
+            valor < 0 || valor > 100 -> ValidacaoResultado.Invalido("A nota base deve estar entre 0 e 100.")
+            else -> ValidacaoResultado.Valido
+        }
+    }
+}
+
+class ValidadorCommits: Validador<Int>{
+    override fun validar(valor: Int): ValidacaoResultado {
+        return when {
+            valor < 0 -> ValidacaoResultado.Invalido("A quantidade de commits não pode ser negativa.")
+            else -> ValidacaoResultado.Valido
+        }
+    }
+}
+
+class ValidadorTempo: Validador<Int>{
+    override fun validar(valor: Int): ValidacaoResultado {
+        return when {
+            valor <= 0 -> ValidacaoResultado.Invalido("O tempo de entrega deve ser maior que zero.")
+            else -> ValidacaoResultado.Valido
+        }
+    }
+}

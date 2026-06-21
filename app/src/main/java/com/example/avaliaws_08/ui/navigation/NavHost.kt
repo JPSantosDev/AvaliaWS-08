@@ -1,9 +1,11 @@
 package com.example.avaliaws_08.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.avaliaws_08.ui.screens.CadastroCompetidorScreen
 import com.example.avaliaws_08.ui.screens.EntregaScreen
 import com.example.avaliaws_08.ui.screens.HomeScreen
@@ -34,12 +36,20 @@ fun AppNavHost() {
             ListaCompetidoresScreen(navController)
         }
 
-        composable(Routes.ENTREGA) {
-            EntregaScreen(navController)
+        composable(
+            route = Routes.ENTREGA_COM_ID,
+            arguments = listOf(navArgument("competidorId") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val competidorId = backStackEntry.arguments?.getInt("competidorId") ?: 0
+            EntregaScreen(navController, competidorId)
         }
 
-        composable(Routes.RESULTADO) {
-            ResultadoScreen(navController)
+        composable(
+            route = Routes.RESULTADO_COM_ID,
+            arguments = listOf(navArgument("competidorId") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val competidorId = backStackEntry.arguments?.getInt("competidorId") ?: 0
+            ResultadoScreen(navController, competidorId)
         }
 
         composable(Routes.RANKING) {
